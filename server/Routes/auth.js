@@ -21,8 +21,9 @@ router.post("/api/login", (req, res) => {
         
         res.cookie("token", token, {
             maxAge: 60 * 60 * 1000,
-            httpOnly: true,   // ahora JS puede leerla
+            httpOnly: true,
             secure: true,
+            path: "/",
             sameSite: "none",
         });
         
@@ -69,7 +70,12 @@ router.get("/api/me", (req, res) => {
 });
 
 router.post("/api/logout", (req, res) => {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        path: "/",
+        sameSite: "none"
+    });
     res.json({ message: "Logged out successfully" });
 });
 
