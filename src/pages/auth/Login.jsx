@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate, } from "react-router-dom"
 import { useUser } from '../../context/UserContext'
 
 const FormInput = ({ label, type = 'text', example, onChange }) => {
@@ -45,6 +45,7 @@ function Login() {
                     <FormInput example="Usuario" label="Username" onChange={(e) => setUsername(e.target.value)} />
                     <FormInput type="password" example="Contraseña" label="Contraseña" onChange={(e) => setPassword(e.target.value)} />
                     <input type="submit" value="Iniciar Sesión" className="bg-purple-500 text-white rounded p-2 self-center cursor-pointer" />
+                    <Link to="/register" className="text-blue-800 p-2 mt-2 text-right">¿No tienes cuenta?</Link>
                 </form>
                 {error && <p className="text-red-500 text-center mt-4 bg-white rounded w-max m-auto p-2">{error}</p>}
             </div>
