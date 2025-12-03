@@ -22,7 +22,7 @@ function Register() {
 
     const [error, setError] = useState("");
 
-    const rol = 1;
+    const rol = "user";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
