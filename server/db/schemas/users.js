@@ -13,8 +13,8 @@ const schema = new mongoose.Schema({
     }
 });
 
-schema.pre("save", async function (next) {
-    if (!this.isNew) return next();
+schema.pre("save", async function () {
+    if (!this.isNew) return;
 
     const counter = await Counter.findByIdAndUpdate(
         { _id: "users" },
@@ -23,7 +23,7 @@ schema.pre("save", async function (next) {
     );
 
     this._id = counter.seq;
-    next();
 });
+
 
 module.exports = mongoose.model("users", schema);

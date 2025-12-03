@@ -1,24 +1,25 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 
-require("../managers/dbManagers/roles");
-
-const users = require("../managers/dbManagers/users")
+const users = require("../db/schemas/users")
 
 const router = Router();
 
-router.post("/api/login", (req, res) => {
+router.post("/api/login", async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = users.getUser({ username });
+        const user = await users.findOne({ username });
+
         if (!user || user.password != password) {
             throw new Error("Invalid username or password");
         }
-        
+
         const SECRET = "tokenSuperSecretNoOneKnowsItBcsItIsVeryLongAndSecretJAJAJAJ"
-        
-        const token = jwt.sign(user, SECRET);
-        
+
+        const { password: pass, ...userWithoutPassword } = user.toObject();
+
+        const token = jwt.sign(userWithoutPassword, SECRET);
+
         res.cookie("token", token, {
             maxAge: 60 * 60 * 1000,
             httpOnly: true,
@@ -26,26 +27,27 @@ router.post("/api/login", (req, res) => {
             path: "/",
             sameSite: "none",
         });
-        
-        res.json(user);
+
+        res.json(userWithoutPassword);
     } catch (error) {
         console.error(error);
         res.status(400).json({ error: error.message });
     }
 });
 
-router.post("/api/register", (req, res) => {
-
+router.post("/api/register", async (req, res) => {
     const { username, password, email, role } = req.body;
     try {
-        if (users.getUser({ username })) {
+        const userFinded = await users.findOne({ username });
+        if (userFinded) {
             throw new Error("User already exists");
         }
         if (!username || !password || !email || !role) {
             throw new Error("All fields are required");
         }
 
-        users.addUser({ username, password, email, role });
+        await new users({ username, password, email, role }).save();
+
         res.json({ message: "User created successfully" });
     } catch (error) {
         console.error(error);
