@@ -3,6 +3,9 @@ const morgan = require('morgan');
 const cors = require("cors")
 const cookieParser = require("cookie-parser");
 
+const connectDB = require("./db/manager");
+connectDB();
+
 const app = express();
 const PORT = 3000;
 
@@ -14,6 +17,10 @@ app.use(cors({
     origin: ["http://localhost:5173", "https://lunchlendar.vercel.app"],
     credentials: true,
 }));
+
+// app.use("/api", (req, res) => {
+//     console.log(req.body)
+// })
 
 app.use(require("./Routes/auth"))
 app.use(require("./Routes/roles"))
