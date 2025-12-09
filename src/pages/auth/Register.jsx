@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AuthManager from "../../api/AuthManager";
+import AuthManager from "../../api/ApiManager";
 import { useNavigate } from 'react-router-dom'
 
 const FormInput = ({ label, type = 'text', example, onChange }) => {

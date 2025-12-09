@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { createContext } from 'react'
-import AuthManager from '../api/AuthManager'
+import AuthManager from '../api/ApiManager'
 
 const UserContext = createContext(null)
 
@@ -18,6 +18,7 @@ export const UserProvider = ({ children }) => {
         const getUser = async () => {
             try {
                 const res = await AuthManager.get("/me");
+                setIsAuthenticated(true);
                 setUser(res.data);
             } catch (e) {
                 setUser(null);
