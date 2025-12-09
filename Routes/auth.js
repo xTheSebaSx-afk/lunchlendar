@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
-
 const users = require("../db/schemas/users")
+
 
 const router = Router();
 
