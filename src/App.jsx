@@ -5,21 +5,26 @@ import Register from './pages/auth/Register'
 import Panel from './pages/Panel'
 import ProtectedRoute from './components/ProtectedRoute'
 import { UserProvider } from './context/UserContext'
+import { DishesProvider } from './context/DishesContext'
+import Dish from './pages/dishes/dish'
 
 function App() {
 
   return (
     <UserProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route element={<ProtectedRoute/>}>
-            <Route path='/panel' element={<Panel />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <DishesProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path='/panel' element={<Panel />} />
+            </Route>
+            <Route path='/dishes/:id' element={<Dish/>}/>
+          </Routes>
+        </BrowserRouter>
+      </DishesProvider>
     </UserProvider>
   )
 }
