@@ -18,12 +18,9 @@ app.use(cors({
     credentials: true,
 }));
 
-// app.use("/api", (req, res) => {
-//     console.log(req.body)
-// })
-
 app.use(require("./Routes/auth"))
 app.use(require("./Routes/roles"))
+app.use(require("./Routes/dishes"))
 
 
 app.listen(PORT, () => {
