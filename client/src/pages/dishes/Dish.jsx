@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ApiManager from '../../api/ApiManager'
 
-function dish() {
+function Dish() {
     const { id } = useParams();
 
     const [dish, setDish] = useState();
@@ -34,4 +34,4 @@ function dish() {
     )
 }
 
-export default dish
+export default Dish

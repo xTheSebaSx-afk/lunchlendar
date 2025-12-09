@@ -2,7 +2,6 @@ import React from 'react'
 import { useUser } from '../context/UserContext'
 import { useEffect, useState } from 'react'
 import { useDishes } from '../context/DishesContext'
-import { Navigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const RecipeCard = ({ dish, buttonOnClick }) => {

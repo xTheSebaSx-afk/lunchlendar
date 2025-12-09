@@ -6,7 +6,7 @@ import Panel from './pages/Panel'
 import ProtectedRoute from './components/ProtectedRoute'
 import { UserProvider } from './context/UserContext'
 import { DishesProvider } from './context/DishesContext'
-import Dish from './pages/dishes/dish'
+import Dish from './pages/dishes/Dish'
 
 function App() {
 
