@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate, } from "react-router-dom"
 import { useUser } from '../../context/UserContext'
+import { useEffect } from "react"
 
 const FormInput = ({ label, type = 'text', example, onChange }) => {
     return (
@@ -18,7 +19,7 @@ function Login() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-    const { login } = useUser()
+    const { login, isAuthenticated } = useUser()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,7 +36,15 @@ function Login() {
 
     const navigate = useNavigate()
 
-    document.title = 'LunchLendar | Login'
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/panel")
+        }
+    }, [isAuthenticated])
+
+    useEffect(() => {
+        document.title = 'LunchLendar | Login'
+    }, [])
 
     return (
         <main className='w-screen h-screen bg-indigo-300 flex justify-center items-center'>

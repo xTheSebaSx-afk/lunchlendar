@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from 'react-router-dom'
-import AuthManager from "..//api/AuthManager"
+import AuthManager from "..//api/ApiManager"
 import { useUser } from '../context/UserContext'
 
 function ProtectedRoute() {
