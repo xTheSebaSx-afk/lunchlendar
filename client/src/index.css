@@ -24,3 +24,9 @@
     background-repeat: no-repeat;
     background-position: center top;
 }
+
+#login-page {
+    background-image: url("/fondo-main.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
