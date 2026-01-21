@@ -3,13 +3,36 @@ import { Link, useNavigate, } from "react-router-dom"
 import { useUser } from '../../context/UserContext'
 import { useEffect } from "react"
 
-const FormInput = ({ label, type = 'text', example, onChange }) => {
+const ErrorWarn = ({ error }) => {
     return (
         <>
-            <div className="m-4">
-                <label className="mr-2" htmlFor={label}>{label}</label>
-                <input className="p-2" type={type} placeholder={example} id={label} onChange={onChange} />
+            <div className="from-[#f6e9f3] to-[#f9ecf5] bg-linear-120 w-[90%] rounded-lg p-2">
+                <img src="/warning.svg" alt="" className="size-[30px] mr-3 inline" />
+                <span className="text-[#895e6a] md:text-[17px] text-[12px]">{error}</span>
             </div>
+        </>
+    )
+}
+
+const Form = ({ error, handleSubmit, setUsername, setPassword }) => {
+    return (
+        <>
+            <form onSubmit={handleSubmit} className="bg-linear-60 to-[#f5e8f8] from-[#bcc2f1] w-[80%] max-w-[400px] h-[65%] my-5 rounded-2xl shadow [box-shadow:0px_1px_3px_1px_#000c] flex flex-col items-center p-4 gap-3">
+                <h2 className="my-2 text-[#3a3c4b]">Iniciar sesión</h2>
+                <div className="w-[90%] flex flex-col gap-4">
+                    <div className="bg-[#fdfdff] rounded-lg p-2 shadow">
+                        <img src="/user.svg" alt="" className="sm:size-6 inline mr-1 size-[17px]" />
+                        <input type="text" placeholder="Nombre de usuario" className="focus-visible:outline-0 w-[90%]" onChange={(e) => setUsername(e.target.value)} />
+                    </div>
+                    <div className="bg-[#fdfdff] rounded-lg p-2 shadow">
+                        <img src="/padlock.svg" alt="" className="sm:size-6 inline mr-1 size-[17px]" />
+                        <input type="password" placeholder="Contraseña" className="focus-visible:outline-0 w-[90%]" onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <input type="submit" value="Iniciar sesión" className="bg-linear-120 from-[#388861] to-[#85a258] rounded-2xl p-4 text-white [box-shadow:0px_1px_3px_1px_#000c]" />
+                </div>
+                <span>¿No tienes cuenta? <Link to="/register" className="text-[#5562b5] underline ">Registrate</Link></span>
+                {error && <ErrorWarn error={error} />}
+            </form>
         </>
     )
 }
@@ -23,13 +46,14 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
             const res = await login(username, password)
             if (res?.status === 200) {
                 navigate("/panel")
             }
         } catch (e) {
-            setError(e.response.data.error || "Error al iniciar sesión")
+            setError(e?.response?.data?.error || "Error al iniciar sesión")
         }
 
     }
@@ -46,18 +70,21 @@ function Login() {
         document.title = 'LunchLendar | Login'
     }, [])
 
+    useEffect(() => {
+        if (!error) return
+
+        const timer = setTimeout(() => {
+            setError("")
+        }, 5000)
+
+        return () => clearTimeout(timer)
+    }, [error])
+
     return (
-        <main className='w-screen h-screen bg-indigo-300 flex justify-center items-center'>
-            <div className="bg-purple-400 rounded p-3 md:w-100 w-70 md:h-100 h-80">
-                <h1 className="md:text-4xl text-2xl text-white m-5 text-center underline">LunchLendar | Login</h1>
-                <form onSubmit={handleSubmit} className="flex flex-col">
-                    <FormInput example="Usuario" label="Username" onChange={(e) => setUsername(e.target.value)} />
-                    <FormInput type="password" example="Contraseña" label="Contraseña" onChange={(e) => setPassword(e.target.value)} />
-                    <input type="submit" value="Iniciar Sesión" className="bg-purple-500 text-white rounded p-2 self-center cursor-pointer" />
-                    <Link to="/register" className="text-blue-800 p-2 mt-2 text-right">¿No tienes cuenta?</Link>
-                </form>
-                {error && <p className="text-red-500 text-center mt-4 bg-white rounded w-max m-auto p-2">{error}</p>}
-            </div>
+        <main className='w-screen h-screen flex justify-center items-center flex-col pt-4' id="login-page">
+            <h1 className="font-bold md:text-5xl text-3xl text-[#1c4546] w-screen text-center">Lunch Calendar</h1>
+            <h2 className="text-gray-500 text-2xl">Login</h2>
+            <Form error={error} handleSubmit={(e) => handleSubmit(e)} setUsername={setUsername} setPassword={setPassword} />
         </main>
     )
 }
