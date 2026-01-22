@@ -22,13 +22,14 @@ const Form = ({ error, handleSubmit, setUsername, setPassword }) => {
                 <div className="w-[90%] flex flex-col gap-4">
                     <div className="bg-[#fdfdff] rounded-lg p-2 shadow">
                         <img src="/user.svg" alt="" className="sm:size-6 inline mr-1 size-[17px]" />
-                        <input type="text" placeholder="Nombre de usuario" className="focus-visible:outline-0 w-[90%]" onChange={(e) => setUsername(e.target.value)} maxLength='25'/>
+                        <input type="text" placeholder="Nombre de usuario" className="focus-visible:outline-0 w-[90%]" onChange={(e) => setUsername(e.target.value)} maxLength='25' />
                     </div>
                     <div className="bg-[#fdfdff] rounded-lg p-2 shadow">
                         <img src="/padlock.svg" alt="" className="sm:size-6 inline mr-1 size-[17px]" />
-                        <input type="password" placeholder="Contraseña" className="focus-visible:outline-0 w-[90%]" onChange={(e) => setPassword(e.target.value)} maxLength='25'/>
+                        <input type="password" placeholder="Contraseña" className="focus-visible:outline-0 w-[90%]" onChange={(e) => setPassword(e.target.value)} maxLength='25' />
                     </div>
                     <input type="submit" value="Iniciar sesión" className="bg-linear-120 from-[#388861] to-[#85a258] rounded-2xl p-4 text-white hover:[box-shadow:0px_1px_3px_1px_#000a] cursor-pointer focus:outline-[#dbeee6] focus:outline-2" />
+
                 </div>
                 <span>¿No tienes cuenta? <Link to="/register" className="text-[#5562b5] underline ">Registrate</Link></span>
                 {error && <ErrorWarn error={error} />}
