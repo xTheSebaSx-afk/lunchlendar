@@ -16,15 +16,19 @@ export function DishesProvider({ children }) {
                 setDishes(res.data)
             } catch (e) {
                 setDishes([])
-                console.log(e)
             }
         }
         getDishes()
     }, [])
 
+    const addDish = async (dish) => {
+        setDishes((prev) => [...prev, dish])
+    }
+
     return (
         <DishesContext.Provider value={{
-            dishes
+            dishes,
+            addDish
         }}>
             {children}
         </DishesContext.Provider>
