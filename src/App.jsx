@@ -20,8 +20,8 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route element={<ProtectedRoute />}>
               <Route path='/panel' element={<Panel />} />
+              <Route path='/dishes/:id' element={<Dish />} />
             </Route>
-            <Route path='/dishes/:id' element={<Dish/>}/>
           </Routes>
         </BrowserRouter>
       </DishesProvider>
