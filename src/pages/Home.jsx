@@ -8,7 +8,7 @@ const NavBar = () => {
                 <li className='cursor-pointer hover:bg-[#a5b1bd62] rounded 2xl px-5 py-2 transition-all duration-300'>Item 2</li>
                 <li className='cursor-pointer hover:bg-[#a5b1bd62] rounded 2xl px-5 py-2 transition-all duration-300'>Item 3</li>
             </ul>
-            <Link to="/login" target='_blank' className='from-[#94c255] to-[#398a5b] from-30% bg-linear-150 px-5 py-2 rounded border-[#366f43] text-white transition-all duration-300 hover:px-7 hover:py-4'>Login</Link>
+            <Link to="/login" target='_blank' className='from-[#94c255] to-[#398a5b] from-30% bg-linear-150 px-5 py-2 rounded border-[#366f43] text-white transition-all duration-300 hover:px-7 hover:py-4 hover:text-2xl'>Login</Link>
         </nav>
     )
 }
@@ -111,7 +111,7 @@ const Footer = () => {
 function Home() {
     return (
         <div className=''>
-            <img src="/icon.svg" alt="lunchcalendar" className='size-[100px] bg-white rounded-full z-10 bottom-0 right-0 fixed' />
+            <img src="/icon.svg" alt="lunchcalendar" className='size-[100px] bg-linear-120 from-[#8cbd56] to-[#b8defc] rounded-full z-10 bottom-0 right-0 m-4 fixed' />
             <Header />
             <Main />
             <Footer />
