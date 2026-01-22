@@ -21,6 +21,29 @@ const schema = new Schema({
     ingredients: {
         type: Array,
         required: true
+    },
+    comments: [{
+        author: {
+            ref: "users",
+            required: true,
+            type: Number
+        },
+        text: {
+            type: String,
+            required: true
+        },
+        date: {
+            type: Date,
+            required: true
+        }
+    }],
+    likes: {
+        type: Number,
+        default: 0
+    },
+    dislikes: {
+        type: Number,
+        default: 0
     }
 });
 
