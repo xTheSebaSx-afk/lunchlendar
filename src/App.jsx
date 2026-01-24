@@ -1,8 +1,8 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter, Outlet } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
-import Panel from './pages/Panel'
+import Dishes from './pages/Dishes'
 import ProtectedRoute from './components/ProtectedRoute'
 import { UserProvider } from './context/UserContext'
 import { DishesProvider } from './context/DishesContext'
@@ -18,10 +18,9 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path='/panel' element={<Panel />} />
-              <Route path='/dishes/:id' element={<Dish />} />
-            </Route>
+            <Route path='/dishes' element={<Dishes />} />
+            <Route path='/dishes/:id' element={<Dish />} />
+            <Route element={<ProtectedRoute />}></Route>
           </Routes>
         </BrowserRouter>
       </DishesProvider>
