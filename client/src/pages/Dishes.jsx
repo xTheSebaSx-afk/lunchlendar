@@ -14,14 +14,24 @@ const StarredRecipe = ({ dish }) => {
 
     return (
         <>
-            <div className="grid md:grid-cols-[350px_1fr] grid-rows-[210px] overflow-hidden rounded-lg bg-[#fefcfe] p-2 my-4">
-                <img src="/food.png" alt="" className='h-[210px] w-[350px] rounded-l-lg' />
+            <div className="grid gridl-cols-[100%] md:grid-cols-[350px_1fr] grid-rows-[210px] overflow-hidden rounded-lg bg-[#fefcfe] p-2 my-4 shadow-amber-300 shadow-lg">
+                <img src="/food.png" alt="" className='h-[210px] w-full md:w-[350px] rounded-l-lg' />
                 <div className="flex">
-                    <div className='w-[170%] bg-[#ffffff] px-3'>
+                    <div className='w-[170%] bg-[#ffffff] px-3 flex-col flex'>
                         <h3>{dish.name}</h3>
                         <p>{dish.description}</p>
                         <p>Precio: S/.<span>{dish.price.toFixed(2)}</span></p>
                         <p>Categoría: {dish.category}</p>
+                        <div className='self-end mt-auto flex gap-4'>
+                            <div className='flex items-center gap-1'>
+                                <img src="/dislike.svg" alt="dislike" className='size-[17px]' />
+                                <p>{dish.dislikes}</p>
+                            </div>
+                            <div className='flex items-center gap-1'>
+                                <img src="/like.svg" alt="like" className='size-[17px]' />
+                                <p>{dish.likes}</p>
+                            </div>
+                        </div>
                     </div>
                     <div className='flex justify-start capitalize flex-col bg-[#eaebea] w-full p-3'>
                         <h3>Ingredientes</h3>
@@ -47,8 +57,8 @@ const StarredRecipe = ({ dish }) => {
 const RecipeCard = ({ dish, buttonOnClick }) => {
     return (
         <>
-            <div className="grid md:grid-cols-[200px_1fr] grid-rows-[160px] overflow-hidden rounded-lg bg-[#fefcfe] p-2">
-                <img src="/food.png" alt="" className='h-40 w-[200px] rounded-l-lg' />
+            <div className="grid grid-cols-[100%]  md:grid-rows-[160px] overflow-hidden rounded-lg bg-[#fefcfe] p-2 hover:shadow-lg">
+                <img src="/food.png" alt="" className='h-40 w-full  rounded-l-lg' />
                 <div className="bg-[#efeef0] p-2 flex flex-col">
                     <h3 className="text-2xl w-max hover:underline"><Link className='block' to={`/dishes/${dish._id}`}>{dish.name}</Link></h3>
                     <p className="">{dish.description}</p>
