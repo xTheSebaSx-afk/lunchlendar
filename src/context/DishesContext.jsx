@@ -9,11 +9,14 @@ export const useDishes = () => {
 
 export function DishesProvider({ children }) {
     const [dishes, setDishes] = useState([])
+    const [loading, setLoading] = useState(true)
+    
     useEffect(() => {
         const getDishes = async () => {
             try {
                 const res = await ApiManager.get("/dishes")
                 setDishes(res.data)
+                setLoading(false)
             } catch (e) {
                 setDishes([])
             }
@@ -28,6 +31,7 @@ export function DishesProvider({ children }) {
     return (
         <DishesContext.Provider value={{
             dishes,
+            loading,
             addDish
         }}>
             {children}
