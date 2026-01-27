@@ -153,12 +153,12 @@ function Panel() {
 
     const { user, logout, isAuthenticated } = useUser()
 
-    const { dishes, addDish } = useDishes()
+    const { dishes, addDish, loading } = useDishes()
 
     const [page, setPage] = useState(0);
 
     useEffect(() => {
-        document.title = `Platos`
+        document.title = `Platos | Lunch Calendar`
     }, [])
 
     const handleLogout = async () => {
@@ -167,15 +167,19 @@ function Panel() {
 
     const filtered = [...dishes];
 
-    const handleOnClick = (id) => {
-        navigate(`/dishes/${id}`);
-    }
+
 
     return (
         <div id='login-page' className='pt-4'>
             <Header isAuthenticated={isAuthenticated} user={user} />
             <SearchBar />
-            <DishesContainer dishes={filtered.sort((a, b) => ((a.likes - a.dislikes) > (b.likes - b.dislikes)) ? -1 : 1)} page={page} />
+            {loading ? (
+                <div className='w-[80%] mx-auto mt-[50px]'>
+                    <h1 className='text-center'>Cargando...</h1>
+                </div>
+            ) : (
+                <DishesContainer dishes={filtered.sort((a, b) => ((a.likes - a.dislikes) > (b.likes - b.dislikes)) ? -1 : 1)} page={page} />
+            )}
             <Footer />
         </div>
     )
