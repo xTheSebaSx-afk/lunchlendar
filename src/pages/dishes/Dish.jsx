@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ApiManager from '../../api/ApiManager'
+import { useUser } from '../../context/UserContext'
 
 function Dish() {
+    const { user } = useUser()
     const { id } = useParams();
 
+    /**
+     * @type {[import('../../types/dish').Dish, Function]}
+     */
     const [dish, setDish] = useState();
     const [error, setError] = useState("");
 
@@ -14,7 +19,6 @@ function Dish() {
                 const res = await ApiManager.get(`/dishes/${id}`)
                 setDish(res.data)
             } catch (e) {
-                console.log(e)
                 setError("Error al cargar el plato")
             }
         }
@@ -28,8 +32,9 @@ function Dish() {
             <p>{dish?.name}</p>
             <p>{dish?.description}</p>
             <p>{dish?.price}</p>
-            <p>{dish?.ingredients.join(", ")}</p>
             <p>{dish?.author}</p>
+            <p>{dish?.ingredients.join(", ")}</p>
+            {dish?.author == user?._id && <button className="bg-emerald-500 text-white p-2 rounded-md">Editar</button>}
         </>
     )
 }
