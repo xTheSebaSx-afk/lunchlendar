@@ -61,11 +61,11 @@ const ObjectiveItem = ({ icon, title, description }) => {
 const Objectives = () => {
     return (
         <ul className="flex justify-between items-start w-[80%] mx-auto gap-8 mb-[100px]">
-            <ObjectiveItem icon="/calendar-icon.svg" title="Plan Your Meals" description="Easily schedule your lunches" />
+            <ObjectiveItem icon="/icons/calendar-icon.svg" title="Plan Your Meals" description="Easily schedule your lunches" />
 
-            <ObjectiveItem icon="/heart.svg" title="Discover Recipes" description="Explore delicious recipe ideas" />
+            <ObjectiveItem icon="/icons/heart.svg" title="Discover Recipes" description="Explore delicious recipe ideas" />
 
-            <ObjectiveItem icon="/hat.svg" title="Balanced Diet" description="Maintain healthy & varied meals" />
+            <ObjectiveItem icon="/icons/hat.svg" title="Balanced Diet" description="Maintain healthy & varied meals" />
         </ul>
     )
 }
@@ -83,7 +83,7 @@ function Home() {
 
     return (
         <div className=''>
-            <img src="/icon.svg" alt="lunchcalendar" className='size-[100px] bg-linear-120 from-[#8cbd56] to-[#b8defc] rounded-full z-10 bottom-0 right-0 m-4 fixed' />
+            <img src="/images/ui/icon.svg" alt="lunchcalendar" className='size-[100px] bg-linear-120 from-[#8cbd56] to-[#b8defc] rounded-full z-10 bottom-0 right-0 m-4 fixed' />
             <Header isAuthenticated={isAuthenticated} user={user} />
             <Main />
             <Footer />
