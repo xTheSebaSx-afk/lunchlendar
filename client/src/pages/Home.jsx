@@ -77,42 +77,6 @@ const Main = () => {
     )
 }
 
-const Footer = () => {
-    return (
-        <footer className='footer shadow [box-shadow:0px_1px_10px_2px_#abc6dd] py-10'>
-            <ul className='w-[screen] flex justify-around'>
-                <li className='font-bold text-3xl underline'>
-                    Lunch Calendar
-                </li>
-                <li>
-                    <ul>
-                        <li>Quick Links</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li>Legal</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li>Contact</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                    </ul>
-                </li>
-            </ul>
-        </footer>
-    )
-}
-
 function Home() {
     const { user, isAuthenticated } = useUser()
 
