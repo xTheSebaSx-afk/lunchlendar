@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
+import Footer from '../components/Footer'
 
 const NavBar = ({ isAuthenticated, user }) => {
     return (
