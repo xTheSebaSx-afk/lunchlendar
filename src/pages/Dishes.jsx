@@ -16,7 +16,7 @@ const StarredRecipe = ({ dish }) => {
     return (
         <>
             <div className="grid gridl-cols-[100%] md:grid-cols-[350px_1fr] grid-rows-[210px] overflow-hidden rounded-lg bg-[#fefcfe] p-2 my-4 shadow-amber-300 shadow-lg">
-                <img src="/food.png" alt="" className='h-[210px] w-full md:w-[350px] rounded-l-lg' />
+                <img src="/images/illustrations/food.png" alt="" className='h-[210px] w-full md:w-[350px] rounded-l-lg' />
                 <div className="flex">
                     <div className='w-[170%] bg-[#ffffff] px-3 flex-col flex'>
                         <h3>{dish.name}</h3>
@@ -25,11 +25,11 @@ const StarredRecipe = ({ dish }) => {
                         <p>Categoría: {dish.category}</p>
                         <div className='self-end mt-auto flex gap-4'>
                             <div className='flex items-center gap-1'>
-                                <img src="/dislike.svg" alt="dislike" className='size-[17px]' />
+                                <img src="/icons/dislike.svg" alt="dislike" className='size-[17px]' />
                                 <p>{dish.dislikes}</p>
                             </div>
                             <div className='flex items-center gap-1'>
-                                <img src="/like.svg" alt="like" className='size-[17px]' />
+                                <img src="/icons/like.svg" alt="like" className='size-[17px]' />
                                 <p>{dish.likes}</p>
                             </div>
                         </div>
@@ -40,7 +40,7 @@ const StarredRecipe = ({ dish }) => {
                             {dish.ingredients.slice(0, 5).map(ingredient => (
                                 <li className='' key={ingredient}>
                                     <p className='flex items-center gap-1'>
-                                        <img src="/leave.svg" alt="leave" className='size-5' /> {ingredient}
+                                        <img src="/icons/leave.svg" alt="leave" className='size-5' /> {ingredient}
                                     </p>
                                 </li>
                             ))}
@@ -59,18 +59,18 @@ const RecipeCard = ({ dish, buttonOnClick }) => {
     return (
         <>
             <div className="grid grid-cols-[100%]  md:grid-rows-[160px] overflow-hidden rounded-lg bg-[#fefcfe] p-2 hover:shadow-lg">
-                <img src="/food.png" alt="" className='h-40 w-full  rounded-l-lg' />
+                <img src="/images/illustrations/food.png" alt="" className='h-40 w-full  rounded-l-lg' />
                 <div className="bg-[#efeef0] p-2 flex flex-col">
                     <h3 className="text-2xl w-max hover:underline"><Link className='block' to={`/dishes/${dish._id}`}>{dish.name}</Link></h3>
                     <p className="">{dish.description}</p>
                     <p className='text-[#565561]'>Precio: S/.<span>{dish.price.toFixed(2)}</span></p>
                     <div className='self-end mt-auto flex gap-4'>
                         <div className='flex items-center gap-1'>
-                            <img src="/dislike.svg" alt="dislike" className='size-[17px]' />
+                            <img src="/icons/dislike.svg" alt="dislike" className='size-[17px]' />
                             <p>{dish.dislikes}</p>
                         </div>
                         <div className='flex items-center gap-1'>
-                            <img src="/like.svg" alt="like" className='size-[17px]' />
+                            <img src="/icons/like.svg" alt="like" className='size-[17px]' />
                             <p>{dish.likes}</p>
                         </div>
                     </div>
@@ -109,7 +109,7 @@ const Header = ({ isAuthenticated, user }) => {
     return (
         <header className="p-2 to-[#c1dff9] from-[#eef1fd] from-50% bg-linear-330 flex justify-between items-center relative top-3 [box-shadow:0px_1px_10px_2px_#abc6dd] text-[#1b3a49] text-[18px] text-center px-8">
             <Link className='flex justify-center items-center gap-2' to="/">
-                <img src="/icon.svg" alt="" className='size-[30px]' />
+                <img src="/images/ui/icon.svg" alt="" className='size-[30px]' />
                 <h2>Lunch Calendar</h2>
             </Link>
             {!isAuthenticated ? (
