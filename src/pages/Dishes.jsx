@@ -3,6 +3,7 @@ import { useUser } from '../context/UserContext'
 import { useEffect, useState } from 'react'
 import { useDishes } from '../context/DishesContext'
 import { useNavigate, Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 /**
  * 
@@ -120,34 +121,6 @@ const Header = ({ isAuthenticated, user }) => {
     )
 }
 
-const Footer = () => {
-    return (
-        <footer className='shadow [box-shadow:0px_1px_10px_2px_#abc6dd] py-10 bg-gray-400/30 mt-20'>
-            <ul className='w-[screen] flex justify-around'>
-                <li className='font-bold text-3xl underline'>
-                    Lunch Calendar
-                </li>
-                <li>
-                    <ul>
-                        <li>Quick Links</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li>Legal</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                        <li>asd</li>
-                    </ul>
-                </li>
-            </ul>
-        </footer>
-    )
-}
-
 function Panel() {
     const navigate = useNavigate();
 
@@ -166,8 +139,6 @@ function Panel() {
     }
 
     const filtered = [...dishes];
-
-
 
     return (
         <div id='login-page' className='pt-4'>
