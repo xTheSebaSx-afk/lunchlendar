@@ -142,7 +142,7 @@ function Panel() {
 
     const [searchParams] = useSearchParams();
 
-    const filtered = [...dishes].filter(dish => dish.name.toLowerCase().includes(searchParams.get("search").toLowerCase()));
+    const filtered = [...dishes].filter(dish => dish.name.toLowerCase().includes((searchParams.get("search") || "").toLowerCase()));
 
     return (
         <div id='login-page' className='pt-4'>
