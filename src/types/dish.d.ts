@@ -16,3 +16,9 @@ export interface Comment {
     date: Date;
     text: string;
 }
+
+export type DishesContextType = {
+    dishes: Dish[]
+    addDish: (dish: Dish) => void
+    loading: boolean
+}
