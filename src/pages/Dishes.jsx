@@ -55,7 +55,7 @@ const StarredRecipe = ({ dish }) => {
 /**
  * @param {{dish: import("../types/dish").Dish}} dish
  */
-const RecipeCard = ({ dish, buttonOnClick }) => {
+const RecipeCard = ({ dish }) => {
     return (
         <>
             <div className="grid grid-cols-[100%]  md:grid-rows-[180x] overflow-hidden rounded-lg bg-[#fefcfe] p-2 hover:shadow-lg">
@@ -80,11 +80,18 @@ const RecipeCard = ({ dish, buttonOnClick }) => {
     )
 }
 
-const SearchBar = ({ onChange }) => {
+const SearchBar = () => {
+
+    const [, setSearchParams] = useSearchParams();
+
+    const [search, setSearch] = useState("");
+
     return (
         <div className='w-[85%] m-auto mt-[50px] flex'>
-            <input type="text" placeholder="Buscar" className='bg-[#f1f0f9] p-2 rounded-l-lg grow outline-none' onChange={onChange} />
-            <button className='cursor-pointer bg-[#b1b1b1] p-2'>
+            <input type="text" placeholder="Buscar" className='bg-[#f1f0f9] p-2 rounded-l-lg grow outline-none' onChange={(e) => setSearch(e.target.value)} />
+            <button className='cursor-pointer bg-[#b1b1b1] p-2' onClick={() => setSearchParams({
+                search: search
+            })}>
                 <img src="/icons/search.svg" alt="search" className='size-6 inline mr-2' />
                 Buscar
             </button>
@@ -108,12 +115,7 @@ const DishesContainer = ({ dishes, page }) => {
     )
 }
 
-/**
- * 
- * @param {{ isAuthenticated: boolean }} isAuthenticated
- * @returns 
- */
-const Header = ({ isAuthenticated, user }) => {
+const Header = () => {
     return (
         <header className="p-2 to-[#c1dff9] from-[#eef1fd] from-50% bg-linear-330 flex justify-between items-center relative top-3 [box-shadow:0px_1px_10px_2px_#abc6dd] text-[#1b3a49] text-[18px] text-center px-8">
             <Link className='flex justify-center items-center gap-2' to="/">
@@ -127,14 +129,10 @@ const Header = ({ isAuthenticated, user }) => {
 
 function Panel() {
 
-    const [search, setSearch] = useState('');
-
-    const { user, logout, isAuthenticated } = useUser()
-
     /**
      * @type {import("../types/dish").DishesContextType}
      */
-    const { dishes, addDish, loading } = useDishes()
+    const { dishes, loading } = useDishes()
 
     const [page, setPage] = useState(0);
 
@@ -142,16 +140,14 @@ function Panel() {
         document.title = `Platos | Lunch Calendar`
     }, [])
 
-    const handleLogout = async () => {
-        await logout();
-    }
+    const [searchParams] = useSearchParams();
 
-    const filtered = [...dishes].filter(dish => dish.name.toLowerCase().includes(search.toLowerCase()));
+    const filtered = [...dishes].filter(dish => dish.name.toLowerCase().includes(searchParams.get("search").toLowerCase()));
 
     return (
         <div id='login-page' className='pt-4'>
-            <Header isAuthenticated={isAuthenticated} user={user} />
-            <SearchBar onChange={(e) => setSearch(e.target.value)} />
+            <Header />
+            <SearchBar />
             {loading ? (
                 <div className='w-[80%] mx-auto mt-[50px]'>
                     <h1 className='text-center'>Cargando...</h1>
