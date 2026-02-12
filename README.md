@@ -1,104 +1,141 @@
-# Lunchlendar
+# Lunch Calendar (Lunchlendar)
 
-## Descripción
-Lunchlendar es una aplicación web diseñada para ayudar a los usuarios a planificar y gestionar sus comidas. Permite a los usuarios crear, editar y eliminar platos, así como gestionar su información de usuario.
+Manual completo del proyecto para incorporar en README.
 
-## Estructura del Proyecto
+## Índice
+- [Descripción general](#descripción-general)
+- [Objetivos y funcionalidades](#objetivos-y-funcionalidades)
+- [Tecnologías](#tecnologías)
+- [Arquitectura y estructura](#arquitectura-y-estructura)
+- [Rutas de la aplicación](#rutas-de-la-aplicación)
+- [Gestión de estado y contexto](#gestión-de-estado-y-contexto)
+- [Integración con API](#integración-con-api)
+- [Requisitos previos](#requisitos-previos)
+- [Instalación](#instalación)
+- [Configuración de entorno](#configuración-de-entorno)
+- [Ejecución](#ejecución)
+- [Linting](#linting)
+- [Guía de uso](#guía-de-uso)
+- [Estructura de datos](#estructura-de-datos)
+- [UI y assets](#ui-y-assets)
+- [Troubleshooting](#troubleshooting)
+- [Contribución](#contribución)
+- [Licencia](#licencia)
 
-### Raíz del Proyecto
-- README.md: Documentación del proyecto.
-- lunchlendar.txt: Archivo adicional para notas o información.
-- client: Contiene el código del lado del cliente.
-- server: Contiene el código del lado del servidor.
+## Descripción general
+Lunch Calendar es una aplicación web orientada a la planificación de comidas, con foco en el almuerzo. Permite explorar platos, buscar recetas y ver detalles de cada plato. Incluye login/registro para administrar la sesión del usuario y un diseño visual con gradientes e imágenes personalizadas.
 
-### Carpeta client
-- `eslint.config.js`: Configuración de ESLint para el proyecto.
-- `index.html`: Archivo HTML principal.
-- `package.json`: Dependencias y scripts del cliente.
-- README.md: Documentación específica del cliente.
-- `vercel.json`: Configuración para despliegue en Vercel.
-- `vite.config.js`: Configuración de Vite para el proyecto.
-- `assets/`: Recursos estáticos como imágenes y estilos.
-- `public/`: Archivos públicos accesibles.
-- `src/`: Código fuente de la aplicación.
-  - `App.jsx`: Componente principal de la aplicación.
-  - `index.css`: Estilos globales.
-  - `main.jsx`: Punto de entrada de la aplicación.
-  - `api/`: Módulos para gestionar las llamadas a la API.
-    - `ApiManager.jsx`: Gestión de las solicitudes a la API.
-  - `components/`: Componentes reutilizables.
-    - `Footer.jsx`: Componente de pie de página.
-    - `ProtectedRoute.jsx`: Ruta protegida para usuarios autenticados.
-    - `modals/`: Componentes de modales.
-      - `Modal.jsx`: Componente de modal genérico.
-  - `context/`: Contextos de React para la gestión del estado.
-    - `DishesContext.jsx`: Contexto para la gestión de platos.
-    - `UserContext.jsx`: Contexto para la gestión de usuarios.
-  - `pages/`: Páginas de la aplicación.
-    - `Dishes.jsx`: Página para gestionar platos.
-    - `Home.jsx`: Página de inicio.
-    - `auth/`: Páginas de autenticación.
-      - `Login.jsx`: Página de inicio de sesión.
-      - `Register.jsx`: Página de registro.
-    - `dishes/`: Páginas relacionadas con platos.
-      - `Dish.jsx`: Página para ver un plato específico.
-  - `types/`: Definiciones de tipos TypeScript.
-    - `dish.d.ts`: Definiciones de tipos para platos.
+## Objetivos y funcionalidades
+- **Landing informativa** con objetivos y CTA para comenzar.
+- **Listado de platos** con búsqueda por nombre.
+- **Detalle de plato** con información principal e ingredientes.
+- **Autenticación** (login, registro, logout) y persistencia de sesión.
+- **Protección de rutas** para secciones privadas (estructura lista para ampliar).
 
-### Carpeta server
-- `index.js`: Punto de entrada del servidor.
-- `package.json`: Dependencias y scripts del servidor.
-- README.md: Documentación específica del servidor.
-- `db/`: Módulos para la gestión de la base de datos.
-  - `manager.js`: Gestión de la conexión a la base de datos.
-  - `schemas/`: Esquemas de la base de datos.
-    - `dishes.js`: Esquema para platos.
-    - `users.js`: Esquema para usuarios.
-    - `usersCounter.js`: Esquema para contar usuarios.
-- `Routes/`: Rutas de la API.
-  - `auth.js`: Rutas de autenticación.
-  - `dishes.js`: Rutas para gestionar platos.
-  - `roles.js`: Rutas para gestionar roles de usuario.
+## Tecnologías
+- **React 19** + **Vite** (SWC) para el frontend.
+- **React Router DOM** para el enrutamiento.
+- **Tailwind CSS** + estilos globales para la UI.
+- **Axios** para el consumo de la API.
+
+## Arquitectura y estructura
+```
+src/
+  api/               # Configuración de Axios
+  components/        # Componentes reutilizables (Footer, LoginButton, ProtectedRoute, Modal)
+  context/           # Contextos globales (UserContext, DishesContext)
+  pages/             # Vistas (Home, Dishes, Auth, Dish)
+  types/             # Tipos compartidos (dish.d.ts)
+  App.jsx            # Rutas principales
+  main.jsx           # Bootstrap de React
+  index.css          # Estilos globales y fondos
+```
+
+## Rutas de la aplicación
+- `/` → Home / Landing
+- `/login` → Login
+- `/register` → Registro
+- `/dishes` → Listado de platos
+- `/dishes/:id` → Detalle de plato
+
+> Hay un componente `ProtectedRoute` para proteger rutas privadas cuando se agreguen paneles o acciones restringidas.
+
+## Gestión de estado y contexto
+- **UserContext**:
+  - Carga de usuario autenticado con `/me`.
+  - Funciones `login()` y `logout()`.
+  - Estado `isAuthenticated` y `loading`.
+- **DishesContext**:
+  - Carga inicial de platos desde `/dishes`.
+  - Estado `dishes` y `loading`.
+  - Acción `addDish()` para extender el listado desde el frontend.
+
+## Integración con API
+La configuración centralizada de Axios está en `src/api/ApiManager.jsx`. Usa variables de entorno para cambiar el `baseURL` según el entorno:
+- `VITE_ENVIRONMENT`
+- `VITE_API_URL`
+- `VITE_API_UR_BASE`
+
+> Nota: `VITE_API_UR_BASE` es el valor para desarrollo (asegúrate de que la variable esté correctamente definida en `.env`).
+
+## Requisitos previos
+- Node.js 18+ (recomendado)
+- npm 9+
 
 ## Instalación
+```bash
+npm install
+```
 
-1. Clona el repositorio:
-   ```bash
-   git clone <URL del repositorio>
-   ```
+## Configuración de entorno
+Crear un archivo `.env` en la raíz con las variables necesarias:
+```bash
+VITE_ENVIRONMENT=development
+VITE_API_UR_BASE=http://localhost:4000/api
+VITE_API_URL=https://tu-api-prod.example.com/api
+```
 
-2. Navega a la carpeta del cliente y del servidor e instala las dependencias:
-   ```bash
-   cd client
-   npm install
-   cd ../server
-   npm install
-   ```
+## Ejecución
+```bash
+npm run dev
+```
 
-3. Inicia el servidor:
-   ```bash
-   node index.js
-   ```
+## Linting
+```bash
+npm run lint
+```
 
-4. Inicia el cliente:
-   ```bash
-   cd client
-   npm run dev
-   ```
+## Guía de uso
+1. **Ingresar a la landing** (`/`) y hacer clic en “Comenzar”.
+2. **Explorar platos** en `/dishes` y usar la búsqueda.
+3. **Abrir un plato** para ver su detalle.
+4. **Login** para habilitar funciones de usuario (como edición, cuando se expanda el sistema).
 
-## Uso
+## Estructura de datos
+El tipo principal es `Dish`:
+- `_id`, `name`, `description`, `price`
+- `likes`, `dislikes`
+- `ingredients[]`
+- `author`
 
-- Accede a la aplicación en `http://localhost:3000` (o el puerto que esté configurado).
-- Regístrate o inicia sesión para comenzar a gestionar tus platos.
+## UI y assets
+Los fondos y recursos visuales se cargan desde `/public` y se aplican vía CSS global:
+- Header, footer y body tienen imágenes de fondo personalizadas.
+- Paleta suave con gradientes en componentes clave.
 
-## Contribuciones
+## Troubleshooting
+**La app no carga datos:**
+- Verificar que el backend esté activo.
+- Confirmar `VITE_API_UR_BASE` o `VITE_API_URL` en `.env`.
 
-Las contribuciones son bienvenidas. Por favor, abre un issue o un pull request para discutir cambios.
+**Problemas con login:**
+- Verificar que el endpoint `/login` esté disponible.
+- Validar CORS y `withCredentials` en backend si usas cookies.
+
+## Contribución
+1. Crear un branch desde `main`.
+2. Hacer cambios con commits pequeños y claros.
+3. Abrir un PR con una descripción precisa.
 
 ## Licencia
-
-Este proyecto está bajo la Licencia MIT.
-
----
-
-Puedes agregar más detalles específicos sobre la funcionalidad, ejemplos de uso, y cualquier otra información relevante que consideres necesaria. Si necesitas más secciones o detalles específicos, házmelo saber.
+Pendiente de definir.
