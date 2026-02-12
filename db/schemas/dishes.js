@@ -16,7 +16,7 @@ const schema = new Schema({
     author: {
         ref: "users",
         required: true,
-        type: Number
+        type: Schema.Types.ObjectId
     },
     ingredients: {
         type: Array,
@@ -26,7 +26,7 @@ const schema = new Schema({
         author: {
             ref: "users",
             required: true,
-            type: Number
+            type: Schema.Types.ObjectId
         },
         text: {
             type: String,
