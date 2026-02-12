@@ -5,7 +5,6 @@ const router = Router();
 const disheSchema = require("../db/schemas/dishes");
 
 router.get("/api/dishes", async (req, res) => {
-    const disheSchema = require("../db/schemas/dishes");
     const dishes = await disheSchema.find();
     res.status(200).json(dishes);
 })
@@ -35,10 +34,13 @@ router.post("/api/dishes/add", async (req, res) => {
 })
 
 router.get("/api/dishes/:id", async (req, res) => {
+
     try {
         const { id } = req.params;
 
-        const dish = await disheSchema.findById(id);
+        const dish = await disheSchema.findById(id)
+            .populate("author", "username")
+            .populate("comments.author", "username")
 
         if (!dish) {
             throw new Error("Dish not found");
