@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 import Footer from '../components/Footer'
-import { useState } from 'react';
 import LoginButton from '../components/LoginButton';
+import AppIcon from '../../public/icons/AppIcon';
+import HeartIcon from '../../public/icons/HeartIcon';
+import CalendarIcon from '../../public/icons/CalendarIcon';
+import HatIcon from '../../public/icons/HatIcon';
 
 const NavBar = () => {
 
@@ -19,7 +22,7 @@ const NavBar = () => {
 }
 
 
-const Header = ({  }) => {
+const Header = ({ }) => {
     return (
         <>
             <header className='header py-10 md:h-[570px] h-[500px]' >
@@ -36,20 +39,15 @@ const Header = ({  }) => {
     )
 }
 
-const ObjectiveItem = ({ icon, title, description }) => {
+const ObjectiveItem = ({ Icon, title, description }) => {
     return (
         <li className="flex flex-col items-center text-center gap-3 max-w-[220px] ">
-
-            {/* Círculo del icono */}
             <div className="md:w-[150px] md:h-[150px] sm:size-[120px] size-[60px] rounded-full bg-white shadow-md flex items-center justify-center shrink-0" >
-                <img src={icon} alt={title} className="md:w-[100px] md:h-[100px] sm:size-[100px] size-10 object-contain" />
+                <Icon className="md:w-[100px] md:h-[100px] sm:size-[100px] size-10 object-contain" />
             </div>
-
-            {/* Texto */}
             <h3 className="font-semibold text-gray-800">
                 {title}
             </h3>
-
             <p className="text-sm text-gray-500 leading-relaxed">
                 {description}
             </p>
@@ -60,11 +58,11 @@ const ObjectiveItem = ({ icon, title, description }) => {
 const Objectives = () => {
     return (
         <ul className="flex justify-between items-start w-[80%] mx-auto gap-8 mb-[100px]">
-            <ObjectiveItem icon="/icons/calendar-icon.svg" title="Plan Your Meals" description="Easily schedule your lunches" />
+            <ObjectiveItem Icon={CalendarIcon} title="Plan Your Meals" description="Easily schedule your lunches" />
 
-            <ObjectiveItem icon="/icons/heart.svg" title="Discover Recipes" description="Explore delicious recipe ideas" />
+            <ObjectiveItem Icon={HeartIcon} title="Discover Recipes" description="Explore delicious recipe ideas" />
 
-            <ObjectiveItem icon="/icons/hat.svg" title="Balanced Diet" description="Maintain healthy & varied meals" />
+            <ObjectiveItem Icon={HatIcon} title="Balanced Diet" description="Maintain healthy & varied meals" />
         </ul>
     )
 }
@@ -86,7 +84,7 @@ function Home() {
 
     return (
         <div className=''>
-            <img src="/images/ui/icon.svg" alt="lunchcalendar" className='size-[100px] bg-linear-120 from-[#8cbd56] to-[#b8defc] rounded-full z-10 bottom-0 right-0 m-4 fixed' />
+            <AppIcon className='size-[100px] bg-linear-120 from-[#8cbd56] to-[#b8defc] rounded-full z-10 bottom-0 right-0 m-4 fixed' />
             <Header />
             <Main />
             <Footer />

@@ -4,6 +4,7 @@ import { useDishes } from '../context/DishesContext'
 import { Link, useSearchParams } from 'react-router-dom'
 import Footer from '../components/Footer'
 import LoginButton from '../components/LoginButton'
+import DislikeIcon from '../../public/icons/DislikeIcon'
 
 /**
  * 
@@ -25,7 +26,7 @@ const StarredRecipe = ({ dish }) => {
                         <p>Categoría: {dish.category}</p>
                         <div className='self-end mt-auto flex gap-4'>
                             <div className='flex items-center gap-1'>
-                                <img src="/icons/dislike.svg" alt="dislike" className='size-[17px]' />
+                                <DislikeIcon className='size-[17px]' />
                                 <p>{dish.dislikes}</p>
                             </div>
                             <div className='flex items-center gap-1'>

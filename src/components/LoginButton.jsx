@@ -19,7 +19,7 @@ function LoginButton() {
                     <li onClick={() => setIsOpen(!isOpen)}><p>Bienvenido, <span className='text-shadow-[0_0px_2px_#000] underline'>{user.username}</span></p></li>
                     {isOpen && (
                         <li className='absolute'>
-                            <button onClick={() => handleLogout()} className='border-l-red-400 border-l-2 pl-2 text-white'>Cerrar sesión</button>
+                            <button onClick={() => handleLogout()} className='border-l-red-400 border-l-2 pl-2 text-white bg-gray-400 p-2 rounded'>Cerrar sesión</button>
                         </li>
                     )}
                 </ul>
