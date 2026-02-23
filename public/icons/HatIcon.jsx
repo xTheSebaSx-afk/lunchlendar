@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg fill="#47874d" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512.001 512.001" xml:space="preserve">
+﻿const HatIcon = (props) => (
+<svg fill="#47874d" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 512.001 512.001" xmlSpace="preserve" {...props}>
 <g>
 	<g>
 		<path d="M420.64,39.488C398.515,14.345,366.617,0.005,333.126,0L178.914,0.059c-0.008,0-0.012,0-0.02,0
@@ -34,3 +33,6 @@
 	</g>
 </g>
 </svg>
+)
+
+export default HatIcon
