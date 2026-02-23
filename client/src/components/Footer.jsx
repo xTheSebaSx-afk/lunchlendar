@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import GithubIcon from '../../public/icons/GithubIcon'
 
 const Links = () => {
     return (
@@ -38,7 +39,7 @@ const SocialLinks = () => {
                     </li>
                     <li>
                         <Link to="https://github.com/xTheSebaSx-afk/lunchlendar" target='_blank'>
-                            <img src="/icons/github.svg" alt="" className='transition-all duration-300 hover:scale-125 rounded-full size-[45px]' />
+                            <GithubIcon className='transition-all duration-300 hover:scale-125 rounded-full size-[45px]' />
                         </Link>
                     </li>
                 </ul>
