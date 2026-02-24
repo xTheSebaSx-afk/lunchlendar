@@ -2,12 +2,15 @@ import { useState } from "react"
 import { Link, useNavigate, } from "react-router-dom"
 import { useUser } from '../../context/UserContext'
 import { useEffect } from "react"
+import UserIcon from '@icons/UserIcon.jsx'
+import PadlockIcon from '@icons/PadlockIcon.jsx'
+import WarningIcon from '@icons/WarningIcon.jsx'
 
 const ErrorWarn = ({ error }) => {
     return (
         <>
             <div className="from-[#f6e9f3] to-[#f9ecf5] bg-linear-120 w-[90%] rounded-lg p-2">
-                <img src="/icons/warning.svg" alt="" className="size-[30px] mr-3 inline" />
+                <WarningIcon className="size-[30px] mr-3 inline" />
                 <span className="text-[#895e6a] md:text-[17px] text-[12px]">{error}</span>
             </div>
         </>
@@ -21,11 +24,11 @@ const Form = ({ error, handleSubmit, setUsername, setPassword, buttonDisabled })
                 <h2 className="my-2 text-[#3a3c4b]">Iniciar sesión</h2>
                 <div className="w-[90%] flex flex-col gap-4">
                     <div className="bg-[#fdfdff] rounded-lg p-2 shadow">
-                        <img src="/icons/user.svg" alt="" className="sm:size-6 inline mr-1 size-[17px]" />
+                        <UserIcon className="sm:size-6 inline mr-1 size-[17px]" />
                         <input type="text" placeholder="Nombre de usuario" className="focus-visible:outline-0 w-[90%]" onChange={(e) => setUsername(e.target.value)} maxLength='25' />
                     </div>
                     <div className="bg-[#fdfdff] rounded-lg p-2 shadow">
-                        <img src="/icons/padlock.svg" alt="" className="sm:size-6 inline mr-1 size-[17px]" />
+                        <PadlockIcon className="sm:size-6 inline mr-1 size-[17px]" />
                         <input type="password" placeholder="Contraseña" className="focus-visible:outline-0 w-[90%]" onChange={(e) => setPassword(e.target.value)} maxLength='25' />
                     </div>
                     <input type="submit" value={buttonDisabled ? "Iniciando sesión..." : "Iniciar sesión"} className={`bg-linear-120 from-[#388861] to-[#85a258] rounded-2xl p-4 text-white hover:[box-shadow:0px_1px_3px_1px_#000a] focus:outline-[#dbeee6] focus:outline-2 ${buttonDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`} disabled={buttonDisabled} />
@@ -49,7 +52,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(isLoading) return;
+        if (isLoading) return;
 
         try {
             setIsLoading(true);

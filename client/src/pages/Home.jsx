@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
-import Footer from '../components/Footer'
-import LoginButton from '../components/LoginButton';
-import AppIcon from '../../public/icons/AppIcon';
-import HeartIcon from '../../public/icons/HeartIcon';
-import CalendarIcon from '../../public/icons/CalendarIcon';
-import HatIcon from '../../public/icons/HatIcon';
+import Footer from '@components/Footer'
+import LoginButton from '@components/LoginButton';
+import AppIcon from '@icons/AppIcon';
+import HeartIcon from '@icons/HeartIcon';
+import CalendarIcon from '@icons/CalendarIcon';
+import HatIcon from '@icons/HatIcon';
 
 const NavBar = () => {
 

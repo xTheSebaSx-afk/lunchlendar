@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import GithubIcon from '../../public/icons/GithubIcon'
+import GithubIcon from './icons/GithubIcon'
 
 const Links = () => {
     return (
