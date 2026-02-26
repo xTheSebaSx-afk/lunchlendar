@@ -29,4 +29,5 @@
     background-image: url("/images/background/fondo-main.png");
     background-size: cover;
     background-repeat: no-repeat;
+    min-height: 100vh;
 }
