@@ -172,7 +172,7 @@ function Dish() {
         <>
             <main className='p-4' id='login-page'>
                 <Link to="/">
-                    <AppIcon className="absolute size-10 top-5 left-5" />
+                    <AppIcon className="fixed sm:absolute size-10 sm:top-5 sm:left-5 bottom-5 right-5" />
                 </Link>
                 <Header dish={dish} />
                 {error && <p className="text-red-500 text-center mt-4 bg-white rounded w-max m-auto p-2">{error}</p>}
