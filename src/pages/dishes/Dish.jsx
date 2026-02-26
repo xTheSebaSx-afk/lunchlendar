@@ -24,16 +24,16 @@ dayjs.locale("es")
 const Details = ({ dish }) => {
     return (
         <>
-            <ul className="flex w-full justify-around gap-5">
-                <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap'>
+            <ul className="flex w-full justify-around gap-5 flex-wrap">
+                <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap basis-[100px]'>
                     <LikeIcon className="size-6" fill="#c25053" />
                     <span className='text-[#743839]'>{dish.likes}</span> Likes
                 </li>
-                <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap'>
+                <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap basis-[100px]'>
                     <DislikeIcon className="size-6" fill="#c87c61" />
                     <span className='text-[#743839]'>{dish.dislikes}</span> Dislikes
                 </li>
-                <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap'>
+                <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap basis-[100px]'>
                     <CommentIcon className="size-6" fill="#80827a" />
                     <span className='text-[#743839]'>{dish.comments.length}</span> Comentarios
                 </li>
@@ -60,7 +60,7 @@ const Header = ({ dish }) => {
                     </h2>
                     <p className='w-3/4 wrap-anywhere text-[#f8f5ef]'>{dish.description}</p>
                 </div>
-                <span className='bg-[#f9eee3] text-[#9e2726] p-2 px-4 rounded-full font-semibold shadow-lg absolute bottom-8 right-5'>
+                <span className='bg-[#f9eee3] text-[#9e2726] sm:text-[15px] text-[10px] p-2 px-4 rounded-full font-semibold shadow-lg absolute bottom-8 right-5'>
                     S/. {dish.price.toFixed(2)}
                 </span>
             </div>
