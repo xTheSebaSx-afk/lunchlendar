@@ -18,10 +18,13 @@ import CommentIcon from "@icons/CommentIcon"
 dayjs.extend(relativeTime)
 dayjs.locale("es")
 
+/**
+ * @param {{ dish: import("../../types/dish").Dish }} dish
+ */
 const Details = ({ dish }) => {
     return (
         <>
-            <ul className='flex w-full justify-around'>
+            <ul className="flex w-full justify-around gap-5">
                 <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap'>
                     <LikeIcon className="size-6" fill="#c25053" />
                     <span className='text-[#743839]'>{dish.likes}</span> Likes
@@ -66,14 +69,16 @@ const Header = ({ dish }) => {
                     <div className='flex items-center gap-1 '>
                         <UserIcon aria-hidden className='size-[30px]' />
                         <p>Creado por <span className='font-bold'>{dish.author.username}</span></p>
-                        <button className='transition-transform duration-1000'>
+                        <button>
                             {opened ? <DropUpIcon className='cursor-pointer' onClick={() => toggle()} /> : <DropDownIcon className='cursor-pointer' onClick={() => toggle()} />}
                         </button>
                     </div>
                 </li>
-                {opened && <li className='mt-3 border-t border-[#eae4e5] pt-3'>
+                <li
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${opened ? "opacity-100 mt-3 pt-3 border-t border-[#eae4e5]" : "max-h-0 opacity-0 mt-0 pt-0 border-t border-transparent"} `}
+                >
                     <Details dish={dish} />
-                </li>}
+                </li>
             </ul>
         </>
     )
