@@ -114,7 +114,7 @@ const DishesContainer = ({ dishes, page }) => {
         <main className='w-[80%] mx-auto mt-[50px]'>
             <StarredRecipe dish={dishes[0]} />
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#ecf4f2]'>
-                {dishes.slice(1, page + 11).map(dish => (
+                {dishes.slice(1, page * 10 + 1).map(dish => (
                     <RecipeCard dish={dish} key={dish._id} />
                 ))}
             </div>
@@ -134,6 +134,18 @@ const Header = () => {
     )
 }
 
+const SeeMoreButton = ({ setPage }) => {
+    const addPage = () => {
+        setPage((prev) => prev + 1)
+    }
+
+    return (
+        <button onClick={() => addPage()} className='w-max mt-5 bg-white/70 rounded-lg py-2 px-4 text-center mx-auto block cursor-pointer hover:scale-120 transition-all duration-300'>
+            Ver más
+        </button>
+    )
+}
+
 function Panel() {
 
     /**
@@ -141,7 +153,7 @@ function Panel() {
      */
     const { dishes, loading } = useDishes()
 
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         document.title = `Platos | Lunch Calendar`
@@ -160,7 +172,10 @@ function Panel() {
                     <h1 className='text-center'>Cargando...</h1>
                 </div>
             ) : (
-                <DishesContainer dishes={filtered.sort((a, b) => ((a.likes - a.dislikes) > (b.likes - b.dislikes)) ? -1 : 1)} page={page} />
+                <>
+                    <DishesContainer dishes={filtered.sort((a, b) => ((a.likes - a.dislikes) > (b.likes - b.dislikes)) ? -1 : 1)} page={page} />
+                    {page * 10 + 1 < dishes.length && <SeeMoreButton setPage={setPage} />}
+                </>
             )}
             <Footer />
         </div>
