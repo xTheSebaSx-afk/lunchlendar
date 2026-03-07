@@ -127,7 +127,7 @@ const Comments = ({ dish }) => {
                     Comentarios
                 </h3>
                 <div className="flex flex-col gap-2 w-full">
-                    {comments.map((comment, i) => (
+                    {comments.sort((a, b) => new Date(b.date) - new Date(a.date)).map((comment, i) => (
                         <div className="flex items-center gap-2" key={i}>
                             <UserIcon aria-hidden className="size-10" />
                             <div>
