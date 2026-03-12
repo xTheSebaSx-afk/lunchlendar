@@ -53,4 +53,8 @@ router.get("/api/dishes/:id", async (req, res) => {
     }
 })
 
+router.post("/api/dishes/:id/comment", async (req, res) => {
+    const { dish, text } = req.body;
+})
+
 module.exports = router;

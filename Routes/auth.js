@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 const users = require("../db/schemas/users")
-
+require("dotenv").config();
 
 const router = Router();
 
@@ -14,7 +14,7 @@ router.post("/api/login", async (req, res) => {
             throw new Error("Invalid username or password");
         }
 
-        const SECRET = "tokenSuperSecretNoOneKnowsItBcsItIsVeryLongAndSecretJAJAJAJ"
+        const SECRET = process.env.SECRET
 
         const { password: pass, ...userWithoutPassword } = user.toObject();
 
