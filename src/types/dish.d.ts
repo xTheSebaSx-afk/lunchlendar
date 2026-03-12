@@ -2,12 +2,13 @@ export interface Dish {
     _id: string;
     author: Author;
     comments: Comment[];
+    date: DateClass;
     description: string;
-    dislikes: number;
-    ingredients: string[];
-    likes: number;
+    ingredients: Ingredient[];
     name: string;
+    opinions: Opinion[];
     price: number;
+    steps: Step[];
 }
 
 export interface Author {
@@ -22,6 +23,29 @@ export interface Comment {
     text: string;
 }
 
+export interface DateClass {
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface Ingredient {
+    _id: string;
+    name: string;
+    quantity: number;
+    unit: string;
+}
+
+export interface Opinion {
+    _id: string;
+    author: string;
+    type: string;
+}
+
+export interface Step {
+    _id: string;
+    description: string;
+    order: number;
+}
 
 export type DishesContextType = {
     dishes: Dish[]
