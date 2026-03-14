@@ -55,31 +55,40 @@ const StarredRecipe = ({ dish }) => {
 const RecipeCard = ({ dish }) => {
     return (
         <>
-            <div className="grid md:grid-cols-[2fr_5fr] overflow-hidden rounded-lg hover:shadow-lg">
-                <img src="/images/illustrations/food.png" alt="" className='h-[157px] w-full  rounded-l-lg' />
-                <div className="bg-[#a86ef369] p-2 pl-4 flex flex-col relative text-wrap flex-wrap">
-                    <h3 className="text-[15px] font-bold md:text-2xl w-max hover:underline my-2"><Link className='block' to={`/dishes/${dish._id}`}>{dish.name}</Link></h3>
+            <div className="grid grid-cols-1 md:grid-cols-[250px_5fr] overflow-hidden rounded-lg hover:shadow-lg">
+                <img src="/images/illustrations/food.png" alt="" className='w-full rounded-l-lg' />
+                <div className="bg-[#ffffff8a] p-2 pl-4 flex flex-col relative text-wrap flex-wrap">
+                    <h3 className="text-[15px] font-bold md:text-2xl w-max hover:underline my-2 text-[#2d3d48]"><Link className='block' to={`/dishes/${dish._id}`}>{dish.name}</Link></h3>
                     <p className="text-[10px] md:text-[17px]">{dish.description}</p>
                     <div className='mt-auto rounded-tl-lg rounded-tr-lg w-full text-[#225b6d]'>
-                        <ul className='flex gap-2 pt-2 flex-wrap'>
-                            <li className='flex gap-1 items-center border-r border-[#938885] pr-2'>
-                                <LikeIcon className="size-7" fill="#4597a8" /> {dish.opinions.filter(x => x.type == "like").length}
+                        <ul className='flex gap-2 pt-2 p-2 flex-wrap font-bold flex-row justify-between'>
+                            <li>
+                                <ul className='flex gap-2 flex-wrap'>
+                                    <li className='flex gap-1 items-center border-r border-[#938885] pr-2'>
+                                        <LikeIcon className="size-7" fill="#4597a8" /> {dish.opinions.filter(x => x.type == "like").length}
+                                    </li>
+                                    <li className='flex gap-1 items-center border-r border-[#938885] pr-2'>
+                                        <DislikeIcon className="size-7" fill="#77b4d5" /> {dish.opinions.filter(x => x.type == "dislike").length}
+                                    </li>
+                                    <li className='flex gap-1 items-center border-r border-[#938885] pr-2'>
+                                        <ClockIcon className="size-7" fill_face="#313d46" fill_hand="#313d46" /> {dish.steps.length} pasos
+                                    </li>
+                                    <li className='flex gap-1 items-center'>
+                                        <CalendarIcon className="size-5" />
+                                        {new Date(dish.date.createdAt).toLocaleDateString()}
+                                    </li>
+                                </ul>
                             </li>
-                            <li className='flex gap-1 items-center border-r border-[#938885] pr-2'>
-                                <DislikeIcon className="size-7" fill="#77b4d5" /> {dish.opinions.filter(x => x.type == "dislike").length}
-                            </li>
-                            <li className='flex gap-1 items-center border-r border-[#938885] pr-2'>
-                                <ClockIcon className="size-7" fill_face="#313d46" fill_hand="#313d46" /> {dish.steps.length} pasos
-                            </li>
-                            <li className='flex gap-1 items-center'>
-                                <CalendarIcon className="size-5"/>
-                                {new Date(dish.date.createdAt).toLocaleDateString()}
+                            <li >
+                                <span className='border-lg px-4 bg-[#d3dfea] md:text-[17px] py-2 rounded-full text-center font-bold h-max text-[#337589] text-[12px]'>
+                                    S/. {dish.price.toFixed(2)}
+                                </span>
                             </li>
                         </ul>
                     </div>
-                    <span className='absolute right-5 top-4 md:bottom-5 border-lg px-4 bg-[#d3dfea] md:text-[17px] py-2 rounded-full text-center font-bold h-max text-[#337589] text-[12px]'>
+                    {/* <span className='absolute right-5 bottom-4 laptop:top-4 md:bottom-5 border-lg px-4 bg-[#d3dfea] md:text-[17px] py-2 rounded-full text-center font-bold h-max text-[#337589] text-[12px]'>
                         S/. {dish.price.toFixed(2)}
-                    </span>
+                    </span> */}
                 </div>
             </div>
         </>
@@ -175,7 +184,7 @@ function Panel() {
     const filtered = [...dishes].filter(dish => dish.name.toLowerCase().includes((searchParams.get("search") || "").toLowerCase()));
 
     return (
-        <div id='login-page' className='pt-4'>
+        <div id='dishes-page' className='pt-4'>
             <Header />
             {loading ? (
                 <div className='w-[80%] mx-auto mt-[50px]'>
