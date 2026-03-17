@@ -22,22 +22,35 @@ dayjs.locale("es")
  * @param {{ dish: import("../../types/dish").Dish }} dish
  */
 const Details = ({ dish }) => {
+    const likes = dish.opinions.filter(op => op.type === 'like').length;
+    const dislikes = dish.opinions.filter(op => op.type === 'dislike').length;
+
     return (
         <>
             <ul className="flex w-full justify-around gap-5 flex-wrap">
                 <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap basis-[100px]'>
                     <LikeIcon className="size-6" fill="#c25053" />
-                    <span className='text-[#743839]'>{dish.likes}</span> Likes
+                    <span className='text-[#743839]'>{likes}</span> Likes
                 </li>
                 <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap basis-[100px]'>
                     <DislikeIcon className="size-6" fill="#c87c61" />
-                    <span className='text-[#743839]'>{dish.dislikes}</span> Dislikes
+                    <span className='text-[#743839]'>{dislikes}</span> Dislikes
                 </li>
                 <li className='flex items-center gap-1 rounded-2xl shadow-lg bg-[#f8eee5] grow justify-center px-4 py-2 flex-wrap basis-[100px]'>
                     <CommentIcon className="size-6" fill="#80827a" />
                     <span className='text-[#743839]'>{dish.comments.length}</span> Comentarios
                 </li>
             </ul>
+        </>
+    )
+}
+
+const StepSquare = ({ stepNumber }) => {
+    return (
+        <>
+            <div className="bg-emerald-300 rounded-lg">
+                {stepNumber}
+            </div>
         </>
     )
 }
@@ -100,10 +113,10 @@ const Ingredients = ({ dish }) => {
                             Ingredientes
                         </h3>
                     </li>
-                    {ingredients.map((ingredient, i) => (
-                        <li className="flex items-center gap-2 border-t border-[#e9e4e4] pt-2" key={i}>
+                    {ingredients.map((ingredient) => (
+                        <li className="flex items-center gap-2 border-t border-[#e9e4e4] pt-2" key={ingredient._id}>
                             <LeaveIcon aria-hidden className="size-5" fill="#5c7845" />
-                            <p>{ingredient}</p>
+                            <p>{ingredient.quantity} {ingredient.unit} de {ingredient.name}</p>
                         </li>
                     ))}
                 </ul>
